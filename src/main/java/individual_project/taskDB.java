@@ -6,10 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class taskDB {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -155,4 +152,23 @@ public class taskDB {
         }
         return -1;
     }
+
+    private void sortByDate(){
+        Collections.sort(dataBase, new Comparator<Task>() {
+            @Override
+            public int compare(Task u1, Task u2) {
+                return u1.getDueDate().compareTo(u2.getDueDate());
+            }
+        });
+    }
+
+    private void sortByProject(){
+        Collections.sort(dataBase, new Comparator<Task>() {
+            @Override
+            public int compare(Task u1, Task u2) {
+                return u1.getProject().compareTo(u2.getProject());
+            }
+        });
+    }
+
 }
