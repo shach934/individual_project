@@ -35,7 +35,7 @@ public class Task{
     public String toString(){
         StringBuilder taskInfo = new StringBuilder("Task: " + title + "\n");
         taskInfo.append("Project: " + project + "\n");
-        taskInfo.append("Status: " + status + "\n");
+        taskInfo.append("Status: " + status.toString().toLowerCase() + "\n");
         taskInfo.append("Due Date: " + dueDate + "\n");
         return taskInfo.toString();
     }
