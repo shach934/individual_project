@@ -17,3 +17,8 @@ src/.DS_Store
 .idea/misc.xml
 .idea/vcs.xml
 .idea/.gitignore
+*.class
+*.xml
+.classpath
+*.prefs
+.project
