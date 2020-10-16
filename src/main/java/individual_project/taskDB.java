@@ -153,22 +153,41 @@ public class taskDB {
         return -1;
     }
 
-    private void sortByDate(){
-        Collections.sort(dataBase, new Comparator<Task>() {
+    public ArrayList<Task> taskByDate(){
+        ArrayList<Task> taskByDate = new ArrayList<>();
+        for(int i = 0; i < dataBase.size(); i ++){
+            taskByDate.add(dataBase.get(i));
+        }
+        Collections.sort(taskByDate, new Comparator<Task>() {
             @Override
             public int compare(Task u1, Task u2) {
                 return u1.getDueDate().compareTo(u2.getDueDate());
             }
         });
+        return taskByDate;
     }
 
-    private void sortByProject(){
-        Collections.sort(dataBase, new Comparator<Task>() {
+    public ArrayList<Task> taskByProject(){
+        ArrayList<Task> taskByProject = new ArrayList<>();
+        for(int i = 0; i < dataBase.size(); i ++){
+            taskByProject.add(dataBase.get(i));
+        }
+        Collections.sort(taskByProject, new Comparator<Task>() {
             @Override
             public int compare(Task u1, Task u2) {
                 return u1.getProject().compareTo(u2.getProject());
             }
         });
+        return taskByProject;
     }
 
+    public ArrayList<Task> taskNotDone(){
+        ArrayList<Task> taskNotDone = new ArrayList<>();
+        for(int i = 0; i < dataBase.size(); i ++){
+            if(!dataBase.get(i).getStatus().equals(Status.DONE)){
+                taskNotDone.add(dataBase.get(i));
+            }
+        }
+        return taskNotDone;
+    }
 }

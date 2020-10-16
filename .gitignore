@@ -16,3 +16,7 @@ src/.DS_Store
 .idea/jarRepositories.xml
 .idea/misc.xml
 .idea/vcs.xml
+*.class
+*.prefs
+.classpath
+.project

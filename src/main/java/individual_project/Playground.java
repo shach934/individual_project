@@ -2,13 +2,11 @@ package individual_project;
 
 import org.checkerframework.checker.units.qual.A;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 class User{
-    String lastName;
-    String name;
+    public String lastName;
+    public String name;
     int age;
     User(String lastName, String name, int age){
         this.lastName = lastName;
@@ -23,11 +21,17 @@ class User{
     public String getLastName(){
         return lastName;
     }
-
     @Override
     public String toString(){
-        return this.lastName + " " + this.name + " " + age;
+        return name + " " + lastName + " " + age;
     }
+
+    User(User u){
+        this.lastName = u.lastName;
+        this.name = u.name;
+        this.age = u.age;
+    }
+
 }
 
 
@@ -43,28 +47,35 @@ public class Playground {
         users.add(u1);
         users.add(u2);
 
-        Collections.sort(users, new Comparator<User>() {
+        ArrayList<User> userByName = new ArrayList<>();
+        ArrayList<User> userByLName = new ArrayList<>();
+
+        for(int i = 0; i < users.size(); i ++)
+        {
+            User u = new User(users.get(i));
+            userByName.add(u);
+            userByLName.add(u);
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        Collections.sort(userByName, new Comparator<User>() {
             @Override
             public int compare(User u1, User u2) {
                 return u1.getName().compareTo(u2.getName());
             }
         });
 
-        System.out.println(users);
-
-        Collections.sort(users, new Comparator<User>() {
+        Collections.sort(userByLName, new Comparator<User>() {
             @Override
             public int compare(User u1, User u2) {
                 return u1.getLastName().compareTo(u2.getLastName());
             }
         });
-
+        User a = users.get(1);
+        a.name = "Special";
         System.out.println(users);
-
+        System.out.println(userByName);
+        System.out.println(userByLName);
     }
-
-
-
-
 
 }
