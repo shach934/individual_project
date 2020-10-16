@@ -20,3 +20,4 @@ src/.DS_Store
 *.prefs
 .classpath
 .project
+*.xml
