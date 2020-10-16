@@ -19,6 +19,16 @@ public class Task{
     private String project;
     private String description;
 
+    Task(){}
+
+    Task(Task t){
+        this.title = t.getTitle();
+        this.status = t.getStatus();
+        this.dueDate = t.getDueDate();
+        this.project = t.getProject();
+        this.description = t.getDescription();
+    }
+
     public void setTitle(String title){ this.title = title; }
     public void setStatus(Status status){  this.status = status; }
     public void setDueDate(Date date){ this.dueDate = date; }
@@ -27,7 +37,7 @@ public class Task{
 
     public String getTitle() { return title;}
     public Status getStatus(){  return status;  }
-    public String getDueDate() { return dueDate.toString();}
+    public Date getDueDate() { return dueDate;}
     public String getProject() { return project;}
     public String getDescription() { return description;}
 

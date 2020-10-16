@@ -6,10 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class taskDB {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -154,5 +151,43 @@ public class taskDB {
             }
         }
         return -1;
+    }
+
+    public ArrayList<Task> taskByDate(){
+        ArrayList<Task> taskByDate = new ArrayList<>();
+        for(int i = 0; i < dataBase.size(); i ++){
+            taskByDate.add(dataBase.get(i));
+        }
+        Collections.sort(taskByDate, new Comparator<Task>() {
+            @Override
+            public int compare(Task u1, Task u2) {
+                return u1.getDueDate().compareTo(u2.getDueDate());
+            }
+        });
+        return taskByDate;
+    }
+
+    public ArrayList<Task> taskByProject(){
+        ArrayList<Task> taskByProject = new ArrayList<>();
+        for(int i = 0; i < dataBase.size(); i ++){
+            taskByProject.add(dataBase.get(i));
+        }
+        Collections.sort(taskByProject, new Comparator<Task>() {
+            @Override
+            public int compare(Task u1, Task u2) {
+                return u1.getProject().compareTo(u2.getProject());
+            }
+        });
+        return taskByProject;
+    }
+
+    public ArrayList<Task> taskNotDone(){
+        ArrayList<Task> taskNotDone = new ArrayList<>();
+        for(int i = 0; i < dataBase.size(); i ++){
+            if(!dataBase.get(i).getStatus().equals(Status.DONE)){
+                taskNotDone.add(dataBase.get(i));
+            }
+        }
+        return taskNotDone;
     }
 }
