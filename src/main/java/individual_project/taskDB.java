@@ -190,4 +190,8 @@ public class taskDB {
         }
         return taskNotDone;
     }
+
+    public ArrayList<Task> getDataBase() { return dataBase;  }
+
+    public Task getTask(int index){  return dataBase.get(index);  }
 }
