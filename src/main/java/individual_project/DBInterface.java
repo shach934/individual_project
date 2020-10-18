@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Interface{
+public class DBInterface{
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -60,6 +60,32 @@ public class Interface{
         separateLine();
     }
 
+    public void showTaskDBByProject(taskDB dataBase){
+        tableHead();
+        for(Task t: dataBase.taskByProject()){
+            System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
+            System.out.println();
+        }
+        separateLine();
+    }
+
+    public void showTaskByDueDate(taskDB dataBase){
+        tableHead();
+        for(Task t: dataBase.taskByDate()){
+            System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
+            System.out.println();
+        }
+        separateLine();
+    }
+
+    public void showTaskNotDone(taskDB dataBase){
+        tableHead();
+        for(Task t: dataBase.taskNotDone()){
+            System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
+            System.out.println();
+        }
+        separateLine();
+    }
 
     public void showTask(taskDB dataBase, int index){
         tableHead();

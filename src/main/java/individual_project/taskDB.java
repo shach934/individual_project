@@ -53,7 +53,7 @@ public class taskDB {
         try {
             File newDB = new File(this.file_path);
             if (newDB.createNewFile()) {
-                System.out.println(ANSI_GREEN + "File created: " + newDB.getName() + "Enjoy!" + ANSI_RESET);
+                System.out.println(ANSI_GREEN + "Database file created: <" + newDB.getName() + ">. Enjoy!" + ANSI_RESET);
                 return true;
             }
         } catch (IOException e) {
@@ -103,8 +103,6 @@ public class taskDB {
 
     private Status string2Status(String strStatus){
         switch (strStatus){
-            case "Doing":
-                return Status.DOING;
             case "Pending":
                 return Status.PENDING;
             case "ASAP":
