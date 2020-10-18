@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DBInterface{
+    private taskDB database = new taskDB();
+
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -51,45 +53,45 @@ public class DBInterface{
         System.out.println(separateLine);
     }
 
-    public void showTaskDB(taskDB dataBase){
+    public void showTaskDB(){
         tableHead();
-        for(Task t: dataBase.getDataBase()){
+        for(Task t: database.getDataBase()){
             System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
             System.out.println();
         }
         separateLine();
     }
 
-    public void showTaskDBByProject(taskDB dataBase){
+    public void showTaskDBByProject(){
         tableHead();
-        for(Task t: dataBase.taskByProject()){
+        for(Task t: database.taskByProject()){
             System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
             System.out.println();
         }
         separateLine();
     }
 
-    public void showTaskByDueDate(taskDB dataBase){
+    public void showTaskByDueDate(){
         tableHead();
-        for(Task t: dataBase.taskByDate()){
+        for(Task t: database.taskByDate()){
             System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
             System.out.println();
         }
         separateLine();
     }
 
-    public void showTaskNotDone(taskDB dataBase){
+    public void showTaskNotDone(){
         tableHead();
-        for(Task t: dataBase.taskNotDone()){
+        for(Task t: database.taskNotDone()){
             System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
             System.out.println();
         }
         separateLine();
     }
 
-    public void showTask(taskDB dataBase, int index){
+    public void showTask(int index){
         tableHead();
-        Task t = dataBase.getTask(index);
+        Task t = database.getTask(index);
         System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
         System.out.println();
         separateLine();

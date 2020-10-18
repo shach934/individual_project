@@ -12,7 +12,6 @@ public class myUI {
 
     myUI(){
         DBInterface taskInter = new DBInterface();
-        taskDB taskDB = new taskDB();
         options = new ArrayList<>();
         options.add("1) View Task");
         options.add("2) Add Task");
@@ -24,7 +23,7 @@ public class myUI {
             optSB.append(op).append("\n");
         }
         System.out.println(optSB);
-        commands.put("1", ()->taskInter.showTaskDB(taskDB));
+        commands.put("1", ()->taskInter.showTaskDB());
 
     }
 
