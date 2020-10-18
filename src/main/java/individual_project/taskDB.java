@@ -110,9 +110,13 @@ public class taskDB {
         }
     }
 
+    public boolean hasTask(Task t){  return titles.contains(t.getTitle());  }
+
+    public boolean hasTask(String taskTitle){ return titles.contains(taskTitle); };
+
     public boolean removeTask(Task t){
-        if(titles.contains(t.getTitle())){
-            dataBase.remove(findTask(t));
+        if(hasTask(t)){
+            dataBase.remove(searchTask(t.getTitle()));
             return true;
         }else {
             System.out.println("There is no such task in data base. Check again!");
@@ -127,15 +131,6 @@ public class taskDB {
         }else {
             return false;
         }
-    }
-
-    private int findTask(Task t){
-        for(int i = 0; i < dataBase.size(); i ++){
-            if(dataBase.get(i).equals(t)){
-                return i;
-            }
-        }
-        return -1;
     }
 
     public ArrayList<Task> taskByDate(){
@@ -177,6 +172,15 @@ public class taskDB {
     }
 
     public ArrayList<Task> getDataBase() { return dataBase;  }
-
     public Task getTask(int index){  return dataBase.get(index);  }
+    public Task getTask(String task){return dataBase.get(searchTask(task));  }
+
+    public int searchTask(String t){
+        for(int i = 0; i < dataBase.size(); i ++){
+            if(dataBase.get(i).equals(t)){
+                return i;
+            }
+        }
+        return -1;
+    }
 }

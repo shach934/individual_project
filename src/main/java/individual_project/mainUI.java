@@ -1,5 +1,6 @@
 package individual_project;
 
+import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -22,20 +23,52 @@ public class mainUI {
             optSB.append(op).append("\n");
         }
         System.out.println(optSB);
-        commands.put("1", ()->taskInter.showTaskDB());
-        commands.put("2", ()->addTask());
-        commands.put("3", ()->editTask());
+        commands.put("1", this::showTasks);
+        commands.put("2", this::addTask);
+        commands.put("3", this::editTask);
+        commands.put("4", this::saveExit);
+    }
+
+    private void saveExit() {
+    }
+
+    private void showTasks() {
+
     }
 
     private void editTask() {
         System.out.println("Select the Task you would like to edit:");
-        
+        String title;
+        boolean doneEdit = false;
+        while(!doneEdit){
+            System.out.println("The task to be edited is:");
+            title = read.nextLine();
+            Task t = taskInter.getTask(title);
+            if(t != null){
+                taskInter.showTask(t);
+
+                title = t.getTitle();
+                Date dueDate = inputDueDate();
+                Status status = inputStatus();
+                String project = inputProject();
+                String description = inputDescription();
+                taskInter.
+                Task t = new Task();
+
+
+            }else {
+                System.out.println("The Task doesn't exit in the database, try again!");
+            }
+        }
     }
 
-    public void addTask(){
+    public String inputTitle(){
         System.out.println("Task Title:");
-        String title = read.nextLine();
-        System.out.println("Task Due Date:");
+        return read.nextLine();
+
+    }
+
+    public Date inputDueDate(){
         boolean validDate = false;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
         String strDate;
@@ -43,6 +76,7 @@ public class mainUI {
         Date currentDate = new Date();
         while (!validDate){
             try{
+                System.out.println("Task Due Date:");
                 strDate = read.nextLine();
                 dueDate = sdf.parse(strDate);
                 if(dueDate.before(currentDate)){
@@ -55,28 +89,41 @@ public class mainUI {
                 System.out.println("The Data format is not correct, please try again!");
             }
         }
+        return dueDate;
+    }
+
+    public String inputDescription(){
         System.out.println("Project:");
-        String project = read.nextLine();
-        System.out.println("Status:");
+        return read.nextLine();
+    }
+
+    public Status inputStatus(){
         boolean validStatus = false;
         String strStatus;
         Status status = null;
         while (!validStatus){
+            System.out.println("Status:");
             strStatus = read.nextLine();
             status = Status.fromString(strStatus);
             if(status != null){
                 validStatus = true;
             }
         }
+        return status;
+    }
+
+    public String inputProject(){
         System.out.println("Description:");
-        String description = read.nextLine();
-        Task t = new Task();
-        t.setTitle(title);
-        t.setStatus(status);
-        t.setDueDate(dueDate);
-        t.setProject(project);
-        t.setDescription(description);
-        taskInter.addTask(t);
+        return read.nextLine();
+    }
+
+    public void addTask(){
+        String title = inputTitle();
+        Date dueDate = inputDueDate();
+        Status status = inputStatus();
+        String project = inputProject();
+        String description = inputDescription();
+        taskInter.addTask(new Task(title, dueDate, status, project, description));
     }
 
 }

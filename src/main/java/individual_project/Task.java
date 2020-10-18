@@ -42,6 +42,14 @@ public class Task{
 
     Task(){}
 
+    Task(String title, Date dueDate, Status status, String project, String description){
+        this.title = title;
+        this.dueDate = dueDate;
+        this.status = status;
+        this.project = project;
+        this.description = description;
+    }
+
     Task(Task t){
         this.title = t.getTitle();
         this.status = Status.fromString(t.getStatus());

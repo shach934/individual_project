@@ -96,9 +96,8 @@ public class DBInterface{
         separateLine();
     }
 
-    public void showTask(int index){
+    public void showTask(Task t){
         tableHead();
-        Task t = database.getTask(index);
         System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
         System.out.println();
         separateLine();
@@ -106,5 +105,12 @@ public class DBInterface{
 
     public void addTask(Task t){
         database.addTask(t);
+    }
+
+    public Task getTask(String title){
+        if(database.hasTask(title)){
+            return database.getTask(title);
+        }
+        return null;
     }
 }
