@@ -14,6 +14,9 @@ public class DBInterface{
     // public static final String ANSI_BLUE = "\u001B[34m";
     // public static final String ANSI_PURPLE = "\u001B[35m";
     // public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String italic = "\033[3m";
+    public static final String BOLD = "\033[1m";
+    public static final String endFormat = "\033[0m";
 
     private String format;
     private StringBuilder separateLine = new StringBuilder("");
@@ -44,6 +47,10 @@ public class DBInterface{
 
     private void separateLine(){
         System.out.println(separateLine);
+    }
+
+    public SimpleDateFormat getDateFormat(){
+        return sdf;
     }
 
     private void tableHead(){
@@ -95,5 +102,9 @@ public class DBInterface{
         System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
         System.out.println();
         separateLine();
+    }
+
+    public void addTask(Task t){
+        database.addTask(t);
     }
 }

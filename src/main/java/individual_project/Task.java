@@ -3,9 +3,30 @@ package individual_project;
 import java.util.Date;
 
 enum Status{
-    DOING, PENDING, ASAP, DONE;
-}
+    DOING("Doing"),
+    PENDING("Pending"),
+    ASAP("ASAP"),
+    DONE("Done");
+    private String text;
 
+    Status(String text){
+        this.text = text;
+    }
+
+    public String getText(){
+        return this.text;
+    }
+
+    public static Status fromString(String text) {
+        for (Status b : Status.values()) {
+            if (b.text.equalsIgnoreCase(text)) {
+                return b;
+            }
+        }
+        System.out.println("No constant with text " + text + " found");
+        return null;
+    }
+}
 
 public class Task{
     /**
@@ -23,7 +44,7 @@ public class Task{
 
     Task(Task t){
         this.title = t.getTitle();
-        this.status = t.getStatus();
+        this.status = Status.fromString(t.getStatus());
         this.dueDate = t.getDueDate();
         this.project = t.getProject();
         this.description = t.getDescription();
@@ -36,7 +57,7 @@ public class Task{
     public void setDescription(String description) {  this.description = description; }
 
     public String getTitle() { return title;}
-    public Status getStatus(){  return status;  }
+    public String getStatus(){  return status.getText();  }
     public Date getDueDate() { return dueDate;}
     public String getProject() { return project;}
     public String getDescription() { return description;}

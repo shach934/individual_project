@@ -34,7 +34,7 @@ public class taskDB {
                 Task t = new Task();
                 // "Title", "Status", "Due Date", "Project", "Description"
                 t.setTitle(taskDetail[0]);
-                t.setStatus(string2Status(taskDetail[1]));
+                t.setStatus(Status.fromString(taskDetail[1]));
                 t.setDueDate(sdf.parse(taskDetail[2]));
                 t.setProject(taskDetail[3]);
                 t.setDescription(taskDetail[4]);
@@ -98,19 +98,6 @@ public class taskDB {
             write.close();
         }catch (IOException e) {
             System.out.println("There is problem to write the task database. Check!");
-        }
-    }
-
-    private Status string2Status(String strStatus){
-        switch (strStatus){
-            case "Pending":
-                return Status.PENDING;
-            case "ASAP":
-                return Status.ASAP;
-            case "Done":
-                return Status.DONE;
-            default:
-                return Status.DOING;
         }
     }
 
