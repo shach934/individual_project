@@ -9,8 +9,10 @@ public class mainUI {
     Map<String, Runnable> commands;
     Scanner read = new Scanner(System.in);
     DBInterface taskInter = new DBInterface();
+    String allStatus = "";
 
     mainUI(){
+        getAllStatus();
         options = new ArrayList<>();
         options.add("1) View Task");
         options.add("2) Add Task");
@@ -24,6 +26,7 @@ public class mainUI {
         commands.put("1", this::showTasks);
         commands.put("2", this::addTask);
         commands.put("3", this::editTask);
+        commands.put("3", this::editTask);
         commands.put("4", this::saveExit);
         boolean exit = false;
         String selected;
@@ -31,7 +34,7 @@ public class mainUI {
             System.out.println(optSB);
             selected = read.nextLine().trim();
             if(commands.containsKey(selected)){
-                commands.get(selected);
+                commands.get(selected).run();
                 if(selected.equals("4"))
                     exit = true;
             }else {
@@ -42,10 +45,16 @@ public class mainUI {
 
     private void saveExit() { taskInter.saveDB(); }
 
+    private void getAllStatus(){
+        for(Status s:Status.values()){
+            allStatus += s.getText() + ", ";
+        }
+    }
+
     private void showTasks() {
         boolean validOpt = false;
         while (!validOpt){
-            System.out.println("1) Show Tasks by add time\n2) Show Tasks by Due date\3) Show Tasks by Project");
+            System.out.println("1) Show Tasks by add time\n2) Show Tasks by Due date\n3) Show Tasks by Project");
             String selected = read.nextLine().trim();
             validOpt = true;
             switch (selected){
@@ -92,9 +101,8 @@ public class mainUI {
     }
 
     public String inputTitle(){
-        System.out.println("Task Title:");
+        System.out.println("Title or CANCEL to exit");
         return read.nextLine();
-
     }
 
     public Date inputDueDate(){
@@ -105,8 +113,10 @@ public class mainUI {
         Date currentDate = new Date();
         while (!validDate){
             try{
-                System.out.println("Task Due Date:");
+                System.out.println("Due Date(yyyy-mm-dd, HH:MM:SS) or CANCEL to exit");
                 strDate = read.nextLine();
+                if(strDate.equals("CANCEL"))
+                    return null;
                 dueDate = sdf.parse(strDate);
                 if(dueDate.before(currentDate)){
                     System.out.println("The due date has passed!");
@@ -131,7 +141,7 @@ public class mainUI {
         String strStatus;
         Status status = null;
         while (!validStatus){
-            System.out.println("Status:");
+            System.out.println("Status(" + this.allStatus + ") or CANCEL to exit");
             strStatus = read.nextLine();
             status = Status.fromString(strStatus);
             if(status != null){
@@ -142,16 +152,27 @@ public class mainUI {
     }
 
     public String inputProject(){
-        System.out.println("Description:");
+        System.out.println("Description or CANCEL to exit:");
         return read.nextLine();
     }
 
     public void addTask(){
+
         String title = inputTitle();
+        if(title.equals("CANCEL"))
+            return;
         Date dueDate = inputDueDate();
+        if(dueDate == null)
+            return;
         Status status = inputStatus();
+        if(status == null)
+            return;
         String project = inputProject();
+        if(project.equals("CANCEL"))
+            return;
         String description = inputDescription();
+        if(description.equals("CANCEL"))
+            return;
         taskInter.addTask(new Task(title, dueDate, status, project, description));
     }
 

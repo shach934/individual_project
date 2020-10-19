@@ -28,11 +28,11 @@ public class taskDB {
     private boolean loadDB(){
         try{
             Scanner scanner = new Scanner(new File(this.file_path));
-            String line = scanner.nextLine();
             while(scanner.hasNextLine()){
+                String line = scanner.nextLine();
                 String[] taskDetail = line.split("|@|", -1);
+
                 Task t = new Task();
-                // "Title", "Status", "Due Date", "Project", "Description"
                 t.setTitle(taskDetail[0]);
                 t.setStatus(Status.fromString(taskDetail[1]));
                 t.setDueDate(sdf.parse(taskDetail[2]));
