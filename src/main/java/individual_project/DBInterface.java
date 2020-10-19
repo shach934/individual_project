@@ -103,9 +103,9 @@ public class DBInterface{
         separateLine();
     }
 
-    public void addTask(Task t){
-        database.addTask(t);
-    }
+    public void addTask(Task t){  database.addTask(t); }
+
+    public void removeTask(String title){  database.removeTask(database.searchTask(title));    }
 
     public Task getTask(String title){
         if(database.hasTask(title)){
@@ -113,4 +113,6 @@ public class DBInterface{
         }
         return null;
     }
+
+    public void saveDB(){ database.saveTaskDB();}
 }

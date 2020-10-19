@@ -1,6 +1,5 @@
 package individual_project;
 
-import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -22,17 +21,49 @@ public class mainUI {
         for(String op:options){
             optSB.append(op).append("\n");
         }
-        System.out.println(optSB);
         commands.put("1", this::showTasks);
         commands.put("2", this::addTask);
         commands.put("3", this::editTask);
         commands.put("4", this::saveExit);
+        boolean exit = false;
+        String selected;
+        while (!exit){
+            System.out.println(optSB);
+            selected = read.nextLine().trim();
+            if(commands.containsKey(selected)){
+                commands.get(selected);
+                if(selected.equals("4"))
+                    exit = true;
+            }else {
+                System.out.println("There is no such option, check again!");
+            }
+        }
     }
 
-    private void saveExit() {
-    }
+    private void saveExit() { taskInter.saveDB(); }
 
     private void showTasks() {
+        boolean validOpt = false;
+        while (!validOpt){
+            System.out.println("1) Show Tasks by add time\n2) Show Tasks by Due date\3) Show Tasks by Project");
+            String selected = read.nextLine().trim();
+            validOpt = true;
+            switch (selected){
+                case "1":
+                    taskInter.showTaskDB();
+                    break;
+                case "2":
+                    taskInter.showTaskByDueDate();
+                    break;
+                case "3":
+                    taskInter.showTaskDBByProject();
+                    break;
+                default:
+                    System.out.println("No such option, try again!");
+                    validOpt = false;
+                    break;
+            }
+        }
 
     }
 
@@ -46,16 +77,14 @@ public class mainUI {
             Task t = taskInter.getTask(title);
             if(t != null){
                 taskInter.showTask(t);
-
-                title = t.getTitle();
                 Date dueDate = inputDueDate();
                 Status status = inputStatus();
                 String project = inputProject();
                 String description = inputDescription();
-                taskInter.
-                Task t = new Task();
-
-
+                t.setStatus(status);
+                t.setDueDate(dueDate);
+                t.setProject(project);
+                t.setDescription(description);
             }else {
                 System.out.println("The Task doesn't exit in the database, try again!");
             }
