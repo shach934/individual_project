@@ -3,6 +3,7 @@ package individual_project;
 import java.util.Date;
 
 enum Status{
+
     DOING("Doing"),
     PENDING("Pending"),
     ASAP("ASAP"),
@@ -23,12 +24,14 @@ enum Status{
                 return b;
             }
         }
-        System.out.println("No constant with text " + text + " found");
+        System.out.println("\u001B[31m" + "No Status with text " + "\u001B[32m" + text + "\u001B[31m" + " found" + "\u001B[0m");
         return null;
     }
 }
 
 public class Task{
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
     /**
      * Task class:
      * Construct a task with @param	 Title, @param Status, @param dueData, @param project, @param description.

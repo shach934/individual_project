@@ -17,7 +17,7 @@ public class taskDB {
     private Set<String> titles;
     private String file_path = System.getProperty("user.dir") + "/ToDoLy.SDA";
     private Scanner reader = new Scanner(System.in);
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
+    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
 
     taskDB(){
         dataBase = new ArrayList<>();
@@ -31,7 +31,6 @@ public class taskDB {
             while(scanner.hasNextLine()){
                 String line = scanner.nextLine();
                 String[] taskDetail = line.split("|@|", -1);
-
                 Task t = new Task();
                 t.setTitle(taskDetail[0]);
                 t.setStatus(Status.fromString(taskDetail[1]));
@@ -112,7 +111,7 @@ public class taskDB {
 
     public boolean hasTask(Task t){  return titles.contains(t.getTitle());  }
 
-    public boolean hasTask(String taskTitle){ return titles.contains(taskTitle); };
+    public boolean hasTask(String taskTitle){ return titles.contains(taskTitle); }
 
     public boolean removeTask(Task t){
         if(hasTask(t)){
@@ -135,10 +134,10 @@ public class taskDB {
 
     public ArrayList<Task> taskByDate(){
         ArrayList<Task> taskByDate = new ArrayList<>();
-        for(int i = 0; i < dataBase.size(); i ++){
-            taskByDate.add(dataBase.get(i));
+        for (Task task : dataBase) {
+            taskByDate.add(task);
         }
-        Collections.sort(taskByDate, new Comparator<Task>() {
+        Collections.sort(taskByDate, new Comparator<>() {
             @Override
             public int compare(Task u1, Task u2) {
                 return u1.getDueDate().compareTo(u2.getDueDate());
@@ -149,8 +148,8 @@ public class taskDB {
 
     public ArrayList<Task> taskByProject(){
         ArrayList<Task> taskByProject = new ArrayList<>();
-        for(int i = 0; i < dataBase.size(); i ++){
-            taskByProject.add(dataBase.get(i));
+        for (Task task : dataBase) {
+            taskByProject.add(task);
         }
         Collections.sort(taskByProject, new Comparator<Task>() {
             @Override

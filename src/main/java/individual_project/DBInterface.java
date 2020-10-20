@@ -6,25 +6,12 @@ import java.util.Arrays;
 
 public class DBInterface{
     private taskDB database = new taskDB();
-
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    // public static final String ANSI_YELLOW = "\u001B[33m";
-    // public static final String ANSI_BLUE = "\u001B[34m";
-    // public static final String ANSI_PURPLE = "\u001B[35m";
-    // public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String italic = "\033[3m";
-    public static final String BOLD = "\033[1m";
-    public static final String endFormat = "\033[0m";
-
     private String format;
-    private StringBuilder separateLine = new StringBuilder("");
+    private StringBuilder separateLine = new StringBuilder();
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
 
     // determines display format, later open API to let user to set the format.
     ArrayList<Integer> width = new ArrayList<>(Arrays.asList(20, 10, 20, 30, 50));
-    private int totalWidth = 130;
     private boolean leftAlign = false;
 
     DBInterface(){
@@ -38,17 +25,23 @@ public class DBInterface{
     }
 
     public void setFormat() {
-        this.format = "";
+        StringBuilder sb = new StringBuilder();
         if(leftAlign){
             for(int w:width)
-                this.format += "%-" + w + "s ";
+                sb.append("%-").append(w).append("s ");
+
         }else {
             for(int w:width)
-                this.format += "%" + w + "s ";
+                sb.append("%").append(w).append("s ");
         }
+        this.format = sb.toString();
     }
 
     private void constructSeparateLine(){
+        int totalWidth = 0;
+        for(int w : width)
+            totalWidth += w;
+
         for(int i = 0; i < totalWidth; i++){
             separateLine.append("-");
         }

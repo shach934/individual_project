@@ -1,7 +1,5 @@
 package individual_project;
 
-import com.google.common.graph.AbstractNetwork;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -14,7 +12,7 @@ public class mainUI {
     Map<String, Runnable> commands;
     Scanner read = new Scanner(System.in);
     DBInterface taskInter = new DBInterface();
-    StringBuilder allStatus = new StringBuilder("");
+    StringBuilder allStatus = new StringBuilder();
 
     mainUI(){
         getAllStatus();
@@ -102,6 +100,7 @@ public class mainUI {
                 t.setDueDate(dueDate);
                 t.setProject(project);
                 t.setDescription(description);
+                doneEdit = true;
             }else {
                 System.out.println(ANSI_RED + "The Task doesn't exit in the database, try again!" + ANSI_RESET);
             }
@@ -127,13 +126,13 @@ public class mainUI {
                     return null;
                 dueDate = sdf.parse(strDate);
                 if(dueDate.before(currentDate)){
-                    System.out.println("The due date has passed!");
+                    System.out.println(ANSI_RED + "The due date has passed!" + ANSI_RESET);
                 }else
                 {
                     validDate = true;
                 }
             }catch (ParseException e){
-                System.out.println("The Data format is not correct, please try again!");
+                System.out.println(ANSI_RED + "The Data format is not correct, please try again!" + ANSI_RESET);
             }
         }
         return dueDate;
@@ -183,5 +182,4 @@ public class mainUI {
             return;
         taskInter.addTask(new Task(title, dueDate, status, project, description));
     }
-
 }
