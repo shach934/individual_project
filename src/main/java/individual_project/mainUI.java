@@ -1,15 +1,20 @@
 package individual_project;
 
+import com.google.common.graph.AbstractNetwork;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class mainUI {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+
     ArrayList<String> options;
     Map<String, Runnable> commands;
     Scanner read = new Scanner(System.in);
     DBInterface taskInter = new DBInterface();
-    String allStatus = "";
+    StringBuilder allStatus = new StringBuilder("");
 
     mainUI(){
         getAllStatus();
@@ -26,7 +31,6 @@ public class mainUI {
         commands.put("1", this::showTasks);
         commands.put("2", this::addTask);
         commands.put("3", this::editTask);
-        commands.put("3", this::editTask);
         commands.put("4", this::saveExit);
         boolean exit = false;
         String selected;
@@ -38,7 +42,7 @@ public class mainUI {
                 if(selected.equals("4"))
                     exit = true;
             }else {
-                System.out.println("There is no such option, check again!");
+                System.out.println(ANSI_RED + "No such option, check again!" + ANSI_RESET);
             }
         }
     }
@@ -47,14 +51,14 @@ public class mainUI {
 
     private void getAllStatus(){
         for(Status s:Status.values()){
-            allStatus += s.getText() + ", ";
+            allStatus.append(s.getText()).append("  ");
         }
     }
 
     private void showTasks() {
         boolean validOpt = false;
         while (!validOpt){
-            System.out.println("1) Show Tasks by add time\n2) Show Tasks by Due date\n3) Show Tasks by Project");
+            System.out.println("1) Show Tasks by add time\n2) Show Tasks by Due date\n3) Show Tasks by Project\n4) CANCEL");
             String selected = read.nextLine().trim();
             validOpt = true;
             switch (selected){
@@ -67,8 +71,11 @@ public class mainUI {
                 case "3":
                     taskInter.showTaskDBByProject();
                     break;
+                case "4" :
+                case "CANCEL":
+                    break;
                 default:
-                    System.out.println("No such option, try again!");
+                    System.out.println(ANSI_RED + "No such option, try again!" + ANSI_RESET);
                     validOpt = false;
                     break;
             }
@@ -77,12 +84,13 @@ public class mainUI {
     }
 
     private void editTask() {
-        System.out.println("Select the Task you would like to edit:");
         String title;
         boolean doneEdit = false;
         while(!doneEdit){
-            System.out.println("The task to be edited is:");
+            System.out.println("The task to be edited is or CANCEL to exit:");
             title = read.nextLine();
+            if(title.trim().equals("CANCEL"))
+                break;
             Task t = taskInter.getTask(title);
             if(t != null){
                 taskInter.showTask(t);
@@ -95,7 +103,7 @@ public class mainUI {
                 t.setProject(project);
                 t.setDescription(description);
             }else {
-                System.out.println("The Task doesn't exit in the database, try again!");
+                System.out.println(ANSI_RED + "The Task doesn't exit in the database, try again!" + ANSI_RESET);
             }
         }
     }
