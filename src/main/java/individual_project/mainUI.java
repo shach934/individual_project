@@ -10,7 +10,6 @@ public class mainUI {
     public static final String ANSI_GREEN = "\u001b[32m";
     public static final String ANSI_YELLOW = "\u001b[33m";
 
-
     ArrayList<String> options;
     Map<String, Runnable> commands;
     Scanner read = new Scanner(System.in);

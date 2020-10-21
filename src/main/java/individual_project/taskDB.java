@@ -128,13 +128,12 @@ public class taskDB {
         }
     }
 
-    public boolean hasTask(Task t){  return titles.contains(t.getTitle());  }
-
     public boolean hasTask(String taskTitle){ return titles.contains(taskTitle); }
 
-    public boolean removeTask(Task t){
-        if(hasTask(t)){
-            dataBase.remove(searchTask(t.getTitle()));
+    public boolean removeTask(String title){
+        if(hasTask(title)){
+            dataBase.remove(title);
+            titles.remove(title);
             return true;
         }else {
             System.out.println("There is no such task in data base. Check again!");
@@ -142,19 +141,10 @@ public class taskDB {
         }
     }
 
-    public boolean removeTask(int index){
-        if(index < dataBase.size() && index >= 0){
-            dataBase.remove(index);
-            return true;
-        }else {
-            return false;
-        }
-    }
-
     public ArrayList<Task> taskByDate(){
         ArrayList<Task> taskByDate = new ArrayList<>();
-        for (Task task : dataBase) {
-            taskByDate.add(task);
+        for (Task t : dataBase) {
+            taskByDate.add(new Task(t));
         }
         Collections.sort(taskByDate, new Comparator<>() {
             @Override
@@ -167,8 +157,8 @@ public class taskDB {
 
     public ArrayList<Task> taskByProject(){
         ArrayList<Task> taskByProject = new ArrayList<>();
-        for (Task task : dataBase) {
-            taskByProject.add(task);
+        for (Task t : dataBase) {
+            taskByProject.add(new Task(t));
         }
         Collections.sort(taskByProject, new Comparator<Task>() {
             @Override
@@ -183,20 +173,22 @@ public class taskDB {
         ArrayList<Task> taskNotDone = new ArrayList<>();
         for(int i = 0; i < dataBase.size(); i ++){
             if(!dataBase.get(i).getStatus().equals(Status.DONE)){
-                taskNotDone.add(dataBase.get(i));
+                taskNotDone.add(new Task(dataBase.get(i)));
             }
         }
         return taskNotDone;
     }
 
     public ArrayList<Task> getDataBase() { return dataBase;  }
-    public Task getTask(int index){  return dataBase.get(index);  }
     public Task getTask(String task){return dataBase.get(searchTask(task));  }
 
-    public int searchTask(String t){
-        for(int i = 0; i < dataBase.size(); i ++){
-            if(dataBase.get(i).equals(t)){
-                return i;
+    public int searchTask(String title){
+        if(titles.contains(title)){
+            for(int i = 0; i < dataBase.size(); i ++){
+                Task t = dataBase.get(i);
+                if(t.getTitle().equals(t)){
+                    return i;
+                }
             }
         }
         return -1;

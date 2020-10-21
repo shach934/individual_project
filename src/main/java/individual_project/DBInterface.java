@@ -110,7 +110,7 @@ public class DBInterface {
     }
 
     public void removeTask(String title) {
-        database.removeTask(database.searchTask(title));
+        database.removeTask(title);
     }
 
     public Task getTask(String title) {
