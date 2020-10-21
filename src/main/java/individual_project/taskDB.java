@@ -18,7 +18,8 @@ public class taskDB {
     private String file_path = System.getProperty("user.dir") + "/ToDoLy.SDA";
     private Scanner reader = new Scanner(System.in);
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
-
+    private int done = 0;
+    private int notDone = 0;
     taskDB(){
         dataBase = new ArrayList<>();
         titles = new HashSet<>();
@@ -75,10 +76,28 @@ public class taskDB {
                     DBFile.delete();
                     createDB();
                 }else {
+                    countTasks();
                     return;
                 }
             }
         }
+    }
+
+    private void countTasks() {
+        for(Task t: dataBase){
+            if(t.getStatus().equals(Status.DONE)){
+                this.done += 1;
+            }else{
+                notDone += 1;
+            }
+        }
+    }
+
+    public int[] getCount(){
+        int[] counts = new int[2];
+        counts[0] = notDone;
+        counts[1] = done;
+        return counts;
     }
 
     public void saveTaskDB(){

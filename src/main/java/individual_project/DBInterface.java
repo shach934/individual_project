@@ -124,6 +124,7 @@ public class DBInterface {
         database.saveTaskDB();
     }
 
-    public void test() {
+    public int[] counts(){
+        return database.getCount();
     }
 }

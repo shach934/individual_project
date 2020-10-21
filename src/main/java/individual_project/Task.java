@@ -42,7 +42,6 @@ public class Task {
     private Date dueDate;
     private String project;
     private String description;
-    private String title;
 
     Task() {
     }

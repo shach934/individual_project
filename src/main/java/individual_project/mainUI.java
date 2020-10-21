@@ -7,6 +7,9 @@ import java.util.*;
 public class mainUI {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001b[32m";
+    public static final String ANSI_YELLOW = "\u001b[33m";
+
 
     ArrayList<String> options;
     Map<String, Runnable> commands;
@@ -16,6 +19,7 @@ public class mainUI {
 
     mainUI(){
         getAllStatus();
+        printWelcome();
         options = new ArrayList<>();
         options.add("1) View Task");
         options.add("2) Add Task");
@@ -45,18 +49,90 @@ public class mainUI {
         }
     }
 
+    private void editTask() {
+        boolean validOpt = false;
+        while (!validOpt){
+            System.out.println("1) Update a Task\n2) Mark a task as Done\n3) Remove a Task\n4) CANCEL");
+            String selected = read.nextLine().trim();
+            validOpt = true;
+            switch (selected){
+                case "1":
+                    updateTask();
+                    break;
+                case "2":
+                    markDone();
+                    break;
+                case "3":
+                    removeTask();
+                    break;
+                case "4":
+                    break;
+                default:
+                    System.out.println(ANSI_RED + "No such option, try again!" + ANSI_RESET);
+                    validOpt = false;
+                    break;
+            }
+        }
+    }
+
+    private void removeTask() {
+        String title;
+        boolean doneEdit = false;
+        while(!doneEdit){
+            System.out.println("The task to be removed or CANCEL to exit:");
+            title = read.nextLine();
+            if(title.trim().equals("CANCEL"))
+                break;
+            Task t = taskInter.getTask(title);
+            if(t != null){
+                taskInter.removeTask(title);
+                doneEdit = true;
+            }else {
+                System.out.println(ANSI_RED + "The Task doesn't exit in the database, try again!" + ANSI_RESET);
+            }
+        }
+    }
+
+    private void markDone() {
+        String title;
+        boolean doneEdit = false;
+        while(!doneEdit){
+            System.out.println("The task to be marked as Done or CANCEL to exit:");
+            title = read.nextLine();
+            if(title.trim().equals("CANCEL"))
+                break;
+            Task t = taskInter.getTask(title);
+            if(t != null){
+                taskInter.showTask(t);
+                t.setStatus(Status.DONE);
+                doneEdit = true;
+            }else {
+                System.out.println(ANSI_RED + "The Task doesn't exit in the database, try again!" + ANSI_RESET);
+            }
+        }
+    }
+
+    private void printWelcome()
+    {
+        System.out.println("Welcome to the ToDoLy!");
+        int[] counts = taskInter.counts();
+        System.out.println("You have " + ANSI_YELLOW + counts[0] + ANSI_RESET + " tasks todo and " +ANSI_GREEN + counts[1] +ANSI_RESET+ " tasks are done!");
+    }
+
     private void saveExit() { taskInter.saveDB(); }
 
     private void getAllStatus(){
+        int count = 1;
         for(Status s:Status.values()){
-            allStatus.append(s.getText()).append("  ");
+            allStatus.append(count + ") ").append(s.getText() + " ");
+            count += 1;
         }
     }
 
     private void showTasks() {
         boolean validOpt = false;
         while (!validOpt){
-            System.out.println("1) Show Tasks by add time\n2) Show Tasks by Due date\n3) Show Tasks by Project\n5) CANCEL");
+            System.out.println("1) Show Tasks by add time\n2) Show Tasks by Due date\n3) Show Tasks by Project\n4) Show tasks not done\n5) CANCEL");
             String selected = read.nextLine().trim();
             validOpt = true;
             switch (selected){
@@ -69,7 +145,10 @@ public class mainUI {
                 case "3":
                     taskInter.showTaskDBByProject();
                     break;
-                case "CANCEL":
+                case "4":
+                    taskInter.showTaskNotDone();
+                    break;
+                case "5":
                     break;
                 default:
                     System.out.println(ANSI_RED + "No such option, try again!" + ANSI_RESET);
@@ -80,7 +159,7 @@ public class mainUI {
 
     }
 
-    private void editTask() {
+    private void updateTask() {
         String title;
         boolean doneEdit = false;
         while(!doneEdit){
@@ -147,11 +226,23 @@ public class mainUI {
         String strStatus;
         Status status = null;
         while (!validStatus){
-            System.out.println("Status(" + this.allStatus + ") or CANCEL to exit");
+            System.out.println("Status: " + this.allStatus + " or CANCEL to exit");
             strStatus = read.nextLine();
-            status = Status.fromString(strStatus);
-            if(status != null){
-                validStatus = true;
+            validStatus = true;
+            switch (strStatus){
+                case "1":
+                    status = Status.DOING; break;
+                case "2":
+                    status = Status.PENDING; break;
+                case "3":
+                    status = Status.ASAP; break;
+                case "4":
+                    status = Status.DONE; break;
+                case "CANCEL":
+                    break;
+                default:
+                    System.out.println(ANSI_RED + "No such option, try again!" + ANSI_RESET);
+                    validStatus = false;
             }
         }
         return status;
@@ -163,7 +254,6 @@ public class mainUI {
     }
 
     public void addTask(){
-
         String title = inputTitle();
         if(title.equals("CANCEL"))
             return;

@@ -55,5 +55,6 @@ It show the task by order specified by user in a table. ***TODO: user specify th
 
 Task database can save the tasks to a text file, with each field of task seperated by "|@|" in certain order. This is seperator is chosen arbitrarily.
 
-## The class diagram is as follow:
+## Class diagram
+
 ![Class Diagram](https://github.com/shach934/individual_project/blob/main/Package%20individual_project.png?raw=true)
