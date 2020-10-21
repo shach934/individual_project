@@ -27,3 +27,6 @@ After the application sucessfully initiated. It will displace a menu that user c
 2. Edit a task
 3. View the tasks
 4. Save and Quit
+
+The class diagram is as follow:
+![Class Diagram](https://github.com/shach934/individual_project/blob/main/Package%20individual_project.png?raw=true)
