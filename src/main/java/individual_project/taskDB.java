@@ -69,7 +69,7 @@ public class taskDB {
             createDB();
         }else{
             if(!loadDB()){
-                System.out.println("File is corrupted. Remove and create a new database?\n1) Yes    2) No");
+                System.out.println(ANSI_RED + "File is corrupted. Remove and create a new database?" + ANSI_RESET + "\n1) Yes    2) No");
                 String selected = reader.nextLine();
                 if(selected.equals("1") || selected.equals("Y") || selected.equals("Yes")){
                     DBFile.delete();

@@ -56,7 +56,7 @@ public class mainUI {
     private void showTasks() {
         boolean validOpt = false;
         while (!validOpt){
-            System.out.println("1) Show Tasks by add time\n2) Show Tasks by Due date\n3) Show Tasks by Project\n4) CANCEL");
+            System.out.println("1) Show Tasks by add time\n2) Show Tasks by Due date\n3) Show Tasks by Project\n5) CANCEL");
             String selected = read.nextLine().trim();
             validOpt = true;
             switch (selected){
@@ -69,7 +69,6 @@ public class mainUI {
                 case "3":
                     taskInter.showTaskDBByProject();
                     break;
-                case "4" :
                 case "CANCEL":
                     break;
                 default:
