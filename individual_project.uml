@@ -3,72 +3,79 @@
   <ID>JAVA</ID>
   <OriginalElement>individual_project</OriginalElement>
   <nodes>
-    <node x="131.3869047619047" y="0.0">individual_project.Status</node>
-    <node x="154.94672619047617" y="1902.0">individual_project.mainUI</node>
-    <node x="66.11696428571423" y="283.0">individual_project.Task</node>
-    <node x="57.70744047619047" y="1311.0">individual_project.DBInterface</node>
+    <node x="136.55555555555563" y="0.0">individual_project.Status</node>
+    <node x="155.03361111111118" y="1902.0">individual_project.mainUI</node>
+    <node x="67.69611111111115" y="283.0">individual_project.Task</node>
+    <node x="61.296944444444534" y="1311.0">individual_project.DBInterface</node>
+    <node x="210.6419444444445" y="2382.0">individual_project.ToDoLy</node>
     <node x="0.0" y="698.0">individual_project.taskDB</node>
   </nodes>
   <notes />
   <edges>
     <edge source="individual_project.mainUI" target="individual_project.Task">
       <point x="54.19999999999999" y="-215.0" />
-      <point x="344.64672619047616" y="1877.0" />
-      <point x="328.25" y="1877.0" />
-      <point x="328.25" y="673.0" />
-      <point x="345.7002976190476" y="673.0" />
+      <point x="344.73361111111114" y="1877.0" />
+      <point x="328.25000000000006" y="1877.0" />
+      <point x="328.25000000000006" y="673.0" />
+      <point x="347.2794444444445" y="673.0" />
       <point x="127.08333333333337" y="182.5" />
     </edge>
     <edge source="individual_project.mainUI" target="individual_project.DBInterface">
       <point x="-108.39999999999998" y="-215.0" />
-      <point x="182.0467261904762" y="1877.0" />
-      <point x="116.20744047619047" y="1877.0" />
+      <point x="182.1336111111112" y="1877.0" />
+      <point x="119.79694444444453" y="1877.0" />
       <point x="-58.5" y="270.5" />
     </edge>
     <edge source="individual_project.taskDB" target="individual_project.Task">
       <point x="-31.625" y="-281.5" />
       <point x="94.875" y="673.0" />
-      <point x="91.53363095238089" y="673.0" />
+      <point x="93.11277777777781" y="673.0" />
       <point x="-127.08333333333334" y="182.5" />
     </edge>
     <edge source="individual_project.DBInterface" target="individual_project.Task">
-      <point x="78.0" y="-270.5" />
-      <point x="252.70744047619047" y="1286.0" />
-      <point x="275.82351190476186" y="1286.0" />
-      <point x="275.82351190476186" y="673.0" />
-      <point x="244.03363095238092" y="673.0" />
+      <point x="77.99999999999997" y="-270.5" />
+      <point x="256.29694444444453" y="1286.0" />
+      <point x="280.9052777777778" y="1286.0" />
+      <point x="280.9052777777778" y="673.0" />
+      <point x="245.61277777777784" y="673.0" />
       <point x="25.416666666666686" y="182.5" />
+    </edge>
+    <edge source="individual_project.ToDoLy" target="individual_project.mainUI">
+      <point x="-42.25" y="-27.0" />
+      <point x="252.8919444444445" y="2357.0" />
+      <point x="222.78361111111118" y="2357.0" />
+      <point x="-67.75" y="215.0" />
     </edge>
     <edge source="individual_project.Task" target="individual_project.Status">
       <point x="-76.25" y="-182.5" />
-      <point x="142.36696428571423" y="263.0" />
-      <point x="209.7619047619047" y="263.0" />
+      <point x="143.94611111111115" y="263.0" />
+      <point x="214.93055555555563" y="263.0" />
       <point x="-26.125" y="116.5" />
     </edge>
     <edge source="individual_project.DBInterface" target="individual_project.taskDB">
-      <point x="-78.0" y="-270.5" />
-      <point x="96.70744047619047" y="1286.0" />
+      <point x="-78.00000000000003" y="-270.5" />
+      <point x="100.2969444444445" y="1286.0" />
       <point x="63.25" y="1286.0" />
       <point x="-63.25" y="281.5" />
     </edge>
     <edge source="individual_project.taskDB" target="individual_project.Status">
       <point x="-94.875" y="-281.5" />
       <point x="31.625" y="673.0" />
-      <point x="44.103273809523785" y="673.0" />
-      <point x="44.103273809523785" y="253.0" />
-      <point x="157.5119047619047" y="253.0" />
+      <point x="47.69277777777785" y="673.0" />
+      <point x="47.69277777777785" y="253.0" />
+      <point x="162.68055555555563" y="253.0" />
       <point x="-78.375" y="116.5" />
     </edge>
     <edge source="individual_project.mainUI" target="individual_project.Status">
       <point x="108.39999999999998" y="-215.0" />
-      <point x="398.84672619047615" y="1877.0" />
-      <point x="381.6169642857143" y="1877.0" />
-      <point x="381.6169642857143" y="263.0" />
-      <point x="314.2619047619047" y="263.0" />
-      <point x="78.375" y="116.5" />
+      <point x="398.9336111111112" y="1877.0" />
+      <point x="383.1961111111111" y="1877.0" />
+      <point x="383.1961111111111" y="263.0" />
+      <point x="319.4305555555556" y="263.0" />
+      <point x="78.37499999999997" y="116.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="213.0" y="1014.0" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="152.5" y="2138.0" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
