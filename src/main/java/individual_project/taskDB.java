@@ -9,12 +9,49 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class taskDB {
+
+    /**
+     * taskDB: task database. it uses a ArrayList<Task> to keep all the tasks. a Set to keep all the task titles.
+     * Main responsibilities of taskDB:
+     * 1 read/save tasks from/to file on disk.
+     * 2 keep, add/remove task.
+     * 3 sort tasks by different criteria.
+     *
+     *
+     * Fields:
+     *  ArrayList<Task> dataBase;
+     *  Set<String> titleSet;
+     *  String file_path = System.getProperty("user.dir") + "/ToDoLy.SDA";
+     *  Scanner reader;
+     *  SimpleDateFormat sdf;
+     *  int done = 0;
+     *  int notDone = 0;
+     *
+     *
+     * Methods:
+     * taskDB() constructor.
+     * loadDB():Boolean, read the tasks from the file.
+     * createDB():Boolean, create the database file if the file not exist.
+     * initDB():void, initiate the database, it will call loadDB() and createDB().
+     * countTasks(): void, count the done tasks for welcome information.
+     * getCount(): int[], return the counted number of done tasks.
+     * saveTaskDB():void, save the task database to the file.
+     * addTask(Task):void, add a task to the task array.
+     * hasTask(String):boolean, check if there is a task by its title.
+     * removeTask(String):boolean remove a task by its title.
+     * taskByDate():ArrayList<Task>, copy and sort the task array by due date, return the sorted task arraylist.
+     * taskByProject():ArrayList<Task>, copy and sort the task array by Project, return the sorted task arraylist.
+     * taskNotDone():ArrayList<Task>, copy and sort the task array by if Done, return the sorted task arraylist.
+     * getDataBase():ArrayList<Task>, return the task arraylist.
+     * getTask():Task, get a task by title.
+     */
+
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
 
     private ArrayList<Task> dataBase;
-    private Set<String> titles;
+    private Set<String> titleSet;
     private String file_path = System.getProperty("user.dir") + "/ToDoLy.SDA";
     private Scanner reader;
     private SimpleDateFormat sdf;
@@ -24,7 +61,7 @@ public class taskDB {
     taskDB(String strDateFormat){
         reader = new Scanner(System.in);
         dataBase = new ArrayList<>();
-        titles = new HashSet<>();
+        titleSet = new HashSet<>();
         this.sdf = new SimpleDateFormat(strDateFormat);
         initDB();
     }
@@ -42,7 +79,7 @@ public class taskDB {
                 t.setProject(taskDetail[3]);
                 t.setDescription(taskDetail[4]);
                 dataBase.add(t);
-                titles.add(taskDetail[0].toLowerCase());
+                titleSet.add(taskDetail[0].toLowerCase());
                 if(t.getStatus().toString().equals("Done"))
                     this.done += 1;
                 else
@@ -128,12 +165,12 @@ public class taskDB {
 
     public void addTask(Task t){ dataBase.add(t); }
 
-    public boolean hasTask(String taskTitle){ return titles.contains(taskTitle); }
+    public boolean hasTask(String taskTitle){ return titleSet.contains(taskTitle); }
 
     public boolean removeTask(String title){
         if(hasTask(title)){
             dataBase.remove(title);
-            titles.remove(title);
+            titleSet.remove(title);
             return true;
         }else {
             System.out.println("There is no such task in data base. Check again!");

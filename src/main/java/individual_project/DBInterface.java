@@ -4,6 +4,30 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * DBInterface, an interface to wrap the task database.
+ *
+ *
+ * Methods:
+ * DBInterface(String), constructor, the string is the SimpleDateFormat.
+ * leftAlignment():void, to set if the field in the table is left aligned or not.
+ * setTaskTableFormat():void, setup the task table format. it mainly to construct the format string.
+ * constructSeparateLine():void, construct a separate line to construct the table.
+ * separateLine():void, print a separate line.
+ * tableHead():void, print out the table head.
+ * showLine(Task):void, print out a task in a line.
+ * showTaskDB():void, printout the task table by its added time.
+ * showTaskDBByProject():void, print the task table by
+ * showTaskByDueDate
+ * showTaskNotDone
+ * showTask
+ * addTask
+ * removeTask
+ * getTask
+ * hasTask
+ * saveDB
+ * counts
+ */
 public class DBInterface {
     private String taskTableFormat;
     private StringBuilder separateLine;
