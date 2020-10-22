@@ -5,6 +5,27 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ToDoLyUI {
+    /**
+     *
+     * Methods:
+     *   ToDoLyUI(), initialize the main menu, commands, and prompt user the menu.
+     *   verifyInput(String, Set<String>):String, using set to get the valid input from user.
+     *   editTask():void,
+     *   removeTask():void,
+     *   markDone():void,
+     *   printWelcome():void,
+     *   saveExit():void,
+     *   getAllStatus():void,
+     *   showTasks():void,
+     *   updateTask():void,
+     *   inputTitle():String,
+     *   inputDueDate():Date,
+     *   inputDescription():String,
+     *   inputStatus():Status,
+     *   inputProject():String
+     *   addTask():void,
+     */
+
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001b[32m";
@@ -56,30 +77,29 @@ public class ToDoLyUI {
         }
     }
 
-    private void editTask() {
-        boolean validOpt = false;
-        while (!validOpt){
-            System.out.println("1) Update a Task\n2) Mark a task as Done\n3) Remove a Task\n4) CANCEL");
+    private String verifyInput(String prompt, Set<String> validOption){
+        boolean validSelection = false;
+        while (!validSelection){
+            System.out.println(prompt);
             String selected = read.nextLine().trim();
-            validOpt = true;
-            switch (selected){
-                case "1":
-                    updateTask();
-                    break;
-                case "2":
-                    markDone();
-                    break;
-                case "3":
-                    removeTask();
-                    break;
-                case "4":
-                    break;
-                default:
-                    System.out.println(ANSI_RED + "No such option, try again!" + ANSI_RESET);
-                    validOpt = false;
-                    break;
+            if(validOption.contains(selected)){
+                return selected;
+            }else {
+                System.out.println(ANSI_RED + "Not a valid selection! Try again!");
             }
         }
+        return "";
+    }
+
+    private void editTask() {
+        String prompts = "1) Update a Task\n2) Mark a task as Done\n3) Remove a Task\n4) CANCEL";
+        Set<String> validOpt = new HashSet<>(Arrays.asList("1", "2", "3", "4"));
+        String selected = verifyInput(prompts, validOpt);
+        commands = new HashMap<>();
+        commands.put("1", this::updateTask);
+        commands.put("2", this::markDone);
+        commands.put("3", this::removeTask);
+        commands.get(selected).run();
     }
 
     private void removeTask() {
@@ -137,33 +157,21 @@ public class ToDoLyUI {
     }
 
     private void showTasks() {
-        boolean validOpt = false;
-        while (!validOpt){
-            System.out.println("1) Show Tasks by add time\n2) Show Tasks by Due date\n3) Show Tasks by Project\n4) Show tasks not done\n5) CANCEL");
-            String selected = read.nextLine().trim();
-            validOpt = true;
-            switch (selected){
-                case "1":
-                    taskInter.showTaskDB();
-                    break;
-                case "2":
-                    taskInter.showTaskByDueDate();
-                    break;
-                case "3":
-                    taskInter.showTaskDBByProject();
-                    break;
-                case "4":
-                    taskInter.showTaskNotDone();
-                    break;
-                case "5":
-                    break;
-                default:
-                    System.out.println(ANSI_RED + "No such option, try again!" + ANSI_RESET);
-                    validOpt = false;
-                    break;
-            }
-        }
+        Map<String, String> showTaskCommad = new HashMap<>();
+        showTaskCommad.put("1", "default");
+        showTaskCommad.put("2", "DueDate");
+        showTaskCommad.put("3", "Project");
+        showTaskCommad.put("4", "unDone");
+        showTaskCommad.put("5", "Cancel");
 
+        String prompt = "1) Show Tasks by add time\n2) Show Tasks by Due date\n3) Show Tasks by Project\n4) Show tasks not done\n5) CANCEL";
+        Set<String> validOpt = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5"));
+        String option = verifyInput(prompt, validOpt);
+        String order = showTaskCommad.get(option);
+        if(option != "5")
+            taskInter.showTaskDB(order);
+        else
+            return;
     }
 
     private void updateTask() {
@@ -193,8 +201,20 @@ public class ToDoLyUI {
     }
 
     public String inputTitle(){
-        System.out.println("Title or CANCEL to exit");
-        return read.nextLine().trim();
+        boolean validTitle = false;
+        String title = "";
+        while (!validTitle){
+            System.out.println("Title or CANCEL to exit");
+            title = read.nextLine().trim();
+            if(taskInter.hasTask(title)){
+                System.out.println("There is already a task with this title exists.");
+            }else if(title.length() == 0) {
+                System.out.println("Empty is not a valid title, try again.");
+            }else {
+                validTitle = true;
+            }
+        }
+        return title;
     }
 
     public Date inputDueDate(){
@@ -255,14 +275,26 @@ public class ToDoLyUI {
     }
 
     public String inputProject(){
-        System.out.println("Project or CANCEL to exit:");
-        return read.nextLine().trim();
+        boolean validProject = false;
+        String project = "";
+        while (!validProject){
+            System.out.println("Project or CANCEL to exit:");
+            project = read.nextLine().trim();
+            if(project.length() == 0) {
+                System.out.println("Project cannot be empty, try again.");
+            }else {
+                validProject = true;
+            }
+        }
+        return project;
     }
 
     public void addTask(){
+
         String title = inputTitle();
-        if(title.equals("CANCEL"))
+        if(title.equals("CANCEL")){
             return;
+        }
         Date dueDate = inputDueDate();
         if(dueDate == null)
             return;
@@ -275,7 +307,9 @@ public class ToDoLyUI {
         String description = inputDescription();
         if(description.equals("CANCEL"))
             return;
-
-        taskInter.addTask(new Task(title, dueDate, status, project, description));
+        Task t = new Task(title, dueDate, status, project, description);
+        System.out.println("The following task is added to the Todo list");
+        taskInter.showTask(t);
+        taskInter.addTask(t);
     }
 }

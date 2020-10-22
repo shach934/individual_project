@@ -165,7 +165,7 @@ public class taskDB {
 
     public void addTask(Task t){ dataBase.add(t); }
 
-    public boolean hasTask(String taskTitle){ return titleSet.contains(taskTitle); }
+    public boolean hasTask(String taskTitle){ return titleSet.contains(taskTitle.toLowerCase()); }
 
     public boolean removeTask(String title){
         if(hasTask(title)){

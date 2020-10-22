@@ -46,9 +46,6 @@ public class Task {
     public void setProject(String project) {  this.project = project;  }
     public void setDescription(String description) {  this.description = description; }
 
-    public void markDone() {    this.status = Status.DONE; }
-    public boolean equals(Task t) {  return title == t.title; }
-
     public String getTitle() {  return title;  }
     public String getStatus() {  return status.getText();  }
     public Date getDueDate() { return dueDate; }

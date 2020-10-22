@@ -6,27 +6,29 @@ import java.util.Arrays;
 
 /**
  * DBInterface, an interface to wrap the task database.
- *
+ *     private String taskTableFormat: format for display the task in the table.
+ *     private StringBuilder separateLine: the line to separate the rows in the task table.
+ *     private SimpleDateFormat sdf: the Date format to display in the table.
+ *     private taskDB database: database, that is in charge of sort, add/remove, save/read tasks.
+ *     ArrayList<Integer> width = new ArrayList<>(Arrays.asList(20, 8, 25, 30, 50));
+ *     private boolean leftAlign = false;
  *
  * Methods:
- * DBInterface(String), constructor, the string is the SimpleDateFormat.
- * leftAlignment():void, to set if the field in the table is left aligned or not.
- * setTaskTableFormat():void, setup the task table format. it mainly to construct the format string.
- * constructSeparateLine():void, construct a separate line to construct the table.
- * separateLine():void, print a separate line.
- * tableHead():void, print out the table head.
- * showLine(Task):void, print out a task in a line.
- * showTaskDB():void, printout the task table by its added time.
- * showTaskDBByProject():void, print the task table by
- * showTaskByDueDate
- * showTaskNotDone
- * showTask
- * addTask
- * removeTask
- * getTask
- * hasTask
- * saveDB
- * counts
+ *  DBInterface(String), constructor, the string is the SimpleDateFormat.
+ *  leftAlignment():void, to set if the field in the table is left aligned or not.
+ *  setTaskTableFormat():void, setup the task table format. it mainly to construct the format string.
+ *  constructSeparateLine():void, construct a separate line to construct the table.
+ *  separateLine():void, print a separate line.
+ *  tableHead():void, print out the table head.
+ *  showLine(Task):void, print out a task in a line.
+ *  showTaskDB(String):void, printout the task table by specified order.
+ *  showTask(Task):void, displace a task in a line.
+ *  addTask(Task):void, add a task to the database.
+ *  removeTask(String):void, remove a task from task database by a task title.
+ *  getTask(String):Task, find and return a task by title.
+ *  hasTask(String):boolean, check if a task exists in the task database by title.
+ *  saveDB():void, save the task database to the file.
+ *  counts():int[], return the done/undone tasks in the task database.
  */
 public class DBInterface {
     private String taskTableFormat;
@@ -72,15 +74,15 @@ public class DBInterface {
         }
     }
 
-    private void separateLine() {
+    private void printSeparateLine() {
         System.out.println(separateLine);
     }
 
     private void tableHead() {
-        separateLine();
+        printSeparateLine();
         System.out.printf(taskTableFormat, "Title", "Status", "Due Date", "Project", "Description");
         System.out.println();
-        separateLine();
+        printSeparateLine();
     }
 
     private void showLine(Task t) {
@@ -88,42 +90,33 @@ public class DBInterface {
         System.out.println();
     }
 
-    public void showTaskDB() {
+    public void showTaskDB(String order) {
         tableHead();
-        for (Task t : database.getDataBase()) {
+        ArrayList<Task> db = new ArrayList<>();
+        switch (order){
+            case "default":
+                db = database.getDataBase();
+                break;
+            case "DueDate":
+                db = database.taskByDate();
+                break;
+            case "Project":
+                db = database.taskByProject();
+                break;
+            case "unDone":
+                db = database.taskNotDone();
+                break;
+        }
+        for (Task t : db) {
             showLine(t);
         }
-        separateLine();
-    }
-
-    public void showTaskDBByProject() {
-        tableHead();
-        for (Task t : database.taskByProject()) {
-            showLine(t);
-        }
-        separateLine();
-    }
-
-    public void showTaskByDueDate() {
-        tableHead();
-        for (Task t : database.taskByDate()) {
-            showLine(t);
-        }
-        separateLine();
-    }
-
-    public void showTaskNotDone() {
-        tableHead();
-        for (Task t : database.taskNotDone()) {
-            showLine(t);
-        }
-        separateLine();
+        printSeparateLine();
     }
 
     public void showTask(Task t) {
         tableHead();
         showLine(t);
-        separateLine();
+        printSeparateLine();
     }
 
     public void addTask(Task t) {

@@ -1,7 +1,7 @@
 package individual_project;
 
 public class ToDoLy {
-    public static void main(String[] args) {
+    public static void main() {
         ToDoLyUI ToDoLy = new ToDoLyUI();
     }
 }

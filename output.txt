@@ -1,0 +1,29 @@
+Loading tasks database: <ToDoLy.sda>.
+Welcome to the ToDoLy!
+You have [33m1[0m tasks todo and [32m0[0m tasks are done!
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and QUit
+
+1) Show Tasks by add time
+2) Show Tasks by Due date
+3) Show Tasks by Project
+4) Show tasks not done
+5) CANCEL
+-------------------------------------------------------------------------------------------------------------------------------------
+Title                Status   Due Date                  Project                        Description                                        
+-------------------------------------------------------------------------------------------------------------------------------------
+test                 ASAP     2020-12-12 12:00:00       SDA                            test task                                          
+-------------------------------------------------------------------------------------------------------------------------------------
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and QUit
+
+Title or CANCEL to exit
+Due Date(yyyy-MM-dd HH:mm:ss) or CANCEL to exit
+[31mThe Data format is not correct, please try again![0m
+Due Date(yyyy-MM-dd HH:mm:ss) or CANCEL to exit
+[31mThe Data format is not correct, please try again![0m
+Due Date(yyyy-MM-dd HH:mm:ss) or CANCEL to exit
