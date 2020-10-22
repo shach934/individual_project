@@ -5,26 +5,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DBInterface {
-    private taskDB database = new taskDB();
-    private String format;
-    private StringBuilder separateLine = new StringBuilder();
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
-
-    // determines display format, later open API to let user to set the format.
-    ArrayList<Integer> width = new ArrayList<>(Arrays.asList(20, 10, 20, 30, 50));
+    private String taskTableFormat;
+    private StringBuilder separateLine;
+    private SimpleDateFormat sdf;
+    private taskDB database;
+    ArrayList<Integer> width = new ArrayList<>(Arrays.asList(20, 8, 25, 30, 50));
     private boolean leftAlign = false;
 
-    DBInterface() {
+    DBInterface(String dateFormat) {
+        sdf = new SimpleDateFormat(dateFormat);
+        database  = new taskDB(dateFormat);
+        separateLine  = new StringBuilder();
         leftAlignment();
         constructSeparateLine();
-        setFormat();
+        setTaskTableFormat();
     }
 
     public void leftAlignment() {
         this.leftAlign = true;
     }
 
-    public void setFormat() {
+    public void setTaskTableFormat() {
         StringBuilder sb = new StringBuilder();
         if (leftAlign) {
             for (int w : width)
@@ -34,7 +35,7 @@ public class DBInterface {
             for (int w : width)
                 sb.append("%").append(w).append("s ");
         }
-        this.format = sb.toString();
+        this.taskTableFormat = sb.toString();
     }
 
     private void constructSeparateLine() {
@@ -51,19 +52,15 @@ public class DBInterface {
         System.out.println(separateLine);
     }
 
-    public SimpleDateFormat getDateFormat() {
-        return sdf;
-    }
-
     private void tableHead() {
         separateLine();
-        System.out.printf(format, "Title", "Status", "Due Date", "Project", "Description");
+        System.out.printf(taskTableFormat, "Title", "Status", "Due Date", "Project", "Description");
         System.out.println();
         separateLine();
     }
 
     private void showLine(Task t) {
-        System.out.format(format, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
+        System.out.format(taskTableFormat, t.getTitle(), t.getStatus(), sdf.format(t.getDueDate()), t.getProject(), t.getDescription());
         System.out.println();
     }
 
@@ -119,6 +116,8 @@ public class DBInterface {
         }
         return null;
     }
+
+    public boolean hasTask(String title){ return database.hasTask(title); }
 
     public void saveDB() {
         database.saveTaskDB();

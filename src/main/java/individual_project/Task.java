@@ -2,40 +2,19 @@ package individual_project;
 
 import java.util.Date;
 
-enum Status {
-
-    DOING("Doing"),
-    PENDING("Pending"),
-    ASAP("ASAP"),
-    DONE("Done");
-    private String text;
-
-    Status(String text) {
-        this.text = text;
-    }
-
-    public String getText() {
-        return this.text;
-    }
-
-    public static Status fromString(String text) {
-        for (Status b : Status.values()) {
-            if (b.text.equalsIgnoreCase(text)) {
-                return b;
-            }
-        }
-        System.out.println("\u001B[31m" + "No Status with text " + "\u001B[32m" + text + "\u001B[31m" + " found" + "\u001B[0m");
-        return null;
-    }
-}
-
 public class Task {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     /**
      * Task class:
-     * Construct a task with @param	 Title, @param Status, @param dueData, @param project, @param description.
-     * Function list: set@params,  show(), edit@param,
+     * Construct a task with @param	 Title, @param Status, @param dueDate, @param project, @param description.
+     * Title: a string, unique for each task.
+     * Status: status defined in the Status enum.
+     * DueDate: java Date type.
+     * Project: a string define the project this task belongs to.
+     * Description: a paragraph about the detail of the task.
+     *
+     * Function list: set@params,  show(), get@param,
      */
     private String title;
     private Status status;
@@ -43,8 +22,7 @@ public class Task {
     private String project;
     private String description;
 
-    Task() {
-    }
+    Task() {}
 
     Task(String title, Date dueDate, Status status, String project, String description) {
         this.title = title;
@@ -62,45 +40,20 @@ public class Task {
         this.description = t.getDescription();
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public void setTitle(String title) {  this.title = title;   }
+    public void setStatus(Status status) { this.status = status; }
+    public void setDueDate(Date date) {  this.dueDate = date;   }
+    public void setProject(String project) {  this.project = project;  }
+    public void setDescription(String description) {  this.description = description; }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+    public void markDone() {    this.status = Status.DONE; }
+    public boolean equals(Task t) {  return title == t.title; }
 
-    public void setDueDate(Date date) {
-        this.dueDate = date;
-    }
-
-    public void setProject(String project) {
-        this.project = project;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getStatus() {
-        return status.getText();
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public String getProject() {
-        return project;
-    }
-
-    public String getDescription() {
-        return description;
-    }
+    public String getTitle() {  return title;  }
+    public String getStatus() {  return status.getText();  }
+    public Date getDueDate() { return dueDate; }
+    public String getProject() {  return project;  }
+    public String getDescription() {  return description;  }
 
     @Override
     public String toString() {
@@ -109,13 +62,5 @@ public class Task {
         taskInfo.append("Status: " + status.toString().toLowerCase() + "\n");
         taskInfo.append("Due Date: " + dueDate + "\n");
         return taskInfo.toString();
-    }
-
-    public void markDone() {
-        this.status = Status.DONE;
-    }
-
-    public boolean equals(Task t2) {
-        return title == t2.title;
     }
 }

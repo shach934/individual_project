@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class mainUI {
+public class ToDoLyUI {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001b[32m";
@@ -12,13 +12,21 @@ public class mainUI {
 
     ArrayList<String> options;
     Map<String, Runnable> commands;
-    Scanner read = new Scanner(System.in);
-    DBInterface taskInter = new DBInterface();
-    StringBuilder allStatus = new StringBuilder();
+    Scanner read;
+    DBInterface taskInter;
+    StringBuilder allStatus;
+    SimpleDateFormat sdf;
+    String dateFormat = "yyyy-MM-dd HH:mm:ss";
 
-    mainUI(){
+    ToDoLyUI(){
+
+        read = new Scanner(System.in);
+        allStatus  = new StringBuilder();
+        sdf = new SimpleDateFormat(dateFormat);
+        taskInter = new DBInterface(dateFormat);
         getAllStatus();
         printWelcome();
+
         options = new ArrayList<>();
         options.add("1) View Task");
         options.add("2) Add Task");
@@ -79,7 +87,7 @@ public class mainUI {
         boolean doneEdit = false;
         while(!doneEdit){
             System.out.println("The task to be removed or CANCEL to exit:");
-            title = read.nextLine();
+            title = read.nextLine().trim();
             if(title.trim().equals("CANCEL"))
                 break;
             Task t = taskInter.getTask(title);
@@ -97,7 +105,7 @@ public class mainUI {
         boolean doneEdit = false;
         while(!doneEdit){
             System.out.println("The task to be marked as Done or CANCEL to exit:");
-            title = read.nextLine();
+            title = read.nextLine().trim();
             if(title.trim().equals("CANCEL"))
                 break;
             Task t = taskInter.getTask(title);
@@ -163,7 +171,7 @@ public class mainUI {
         boolean doneEdit = false;
         while(!doneEdit){
             System.out.println("The task to be edited is or CANCEL to exit:");
-            title = read.nextLine();
+            title = read.nextLine().trim();
             if(title.trim().equals("CANCEL"))
                 break;
             Task t = taskInter.getTask(title);
@@ -186,19 +194,18 @@ public class mainUI {
 
     public String inputTitle(){
         System.out.println("Title or CANCEL to exit");
-        return read.nextLine();
+        return read.nextLine().trim();
     }
 
     public Date inputDueDate(){
         boolean validDate = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
         String strDate;
         Date dueDate = null;
         Date currentDate = new Date();
         while (!validDate){
             try{
-                System.out.println("Due Date(yyyy-mm-dd, HH:MM:SS) or CANCEL to exit");
-                strDate = read.nextLine();
+                System.out.println("Due Date(" + dateFormat + ") or CANCEL to exit");
+                strDate = read.nextLine().trim();
                 if(strDate.equals("CANCEL"))
                     return null;
                 dueDate = sdf.parse(strDate);
@@ -216,8 +223,8 @@ public class mainUI {
     }
 
     public String inputDescription(){
-        System.out.println("Project:");
-        return read.nextLine();
+        System.out.println("Description or CANCEL to exit:");
+        return read.nextLine().trim();
     }
 
     public Status inputStatus(){
@@ -226,7 +233,7 @@ public class mainUI {
         Status status = null;
         while (!validStatus){
             System.out.println("Status: " + this.allStatus + " or CANCEL to exit");
-            strStatus = read.nextLine();
+            strStatus = read.nextLine().trim();
             validStatus = true;
             switch (strStatus){
                 case "1":
@@ -248,8 +255,8 @@ public class mainUI {
     }
 
     public String inputProject(){
-        System.out.println("Description or CANCEL to exit:");
-        return read.nextLine();
+        System.out.println("Project or CANCEL to exit:");
+        return read.nextLine().trim();
     }
 
     public void addTask(){
@@ -268,6 +275,7 @@ public class mainUI {
         String description = inputDescription();
         if(description.equals("CANCEL"))
             return;
+
         taskInter.addTask(new Task(title, dueDate, status, project, description));
     }
 }

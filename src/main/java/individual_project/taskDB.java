@@ -16,13 +16,16 @@ public class taskDB {
     private ArrayList<Task> dataBase;
     private Set<String> titles;
     private String file_path = System.getProperty("user.dir") + "/ToDoLy.SDA";
-    private Scanner reader = new Scanner(System.in);
-    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
+    private Scanner reader;
+    private SimpleDateFormat sdf;
     private int done = 0;
     private int notDone = 0;
-    taskDB(){
+
+    taskDB(String strDateFormat){
+        reader = new Scanner(System.in);
         dataBase = new ArrayList<>();
         titles = new HashSet<>();
+        this.sdf = new SimpleDateFormat(strDateFormat);
         initDB();
     }
 
@@ -31,7 +34,7 @@ public class taskDB {
             Scanner scanner = new Scanner(new File(this.file_path));
             while(scanner.hasNextLine()){
                 String line = scanner.nextLine();
-                String[] taskDetail = line.split("|@|", -1);
+                String[] taskDetail = line.split("§@§", 0);
                 Task t = new Task();
                 t.setTitle(taskDetail[0]);
                 t.setStatus(Status.fromString(taskDetail[1]));
@@ -40,6 +43,10 @@ public class taskDB {
                 t.setDescription(taskDetail[4]);
                 dataBase.add(t);
                 titles.add(taskDetail[0].toLowerCase());
+                if(t.getStatus().toString().equals("Done"))
+                    this.done += 1;
+                else
+                    this.notDone += 1;
             }
             scanner.close();
             return true;
@@ -106,10 +113,10 @@ public class taskDB {
             for(Task t:dataBase){
                 //"Title", "Status", "Due Date", "Project", "Description"
                 StringBuilder taskSB = new StringBuilder();
-                taskSB.append(t.getTitle()).append("|@|");
-                taskSB.append(t.getStatus()).append("|@|");
-                taskSB.append(t.getDueDate()).append("|@|");
-                taskSB.append(t.getProject()).append("|@|");
+                taskSB.append(t.getTitle()).append("§@§");
+                taskSB.append(t.getStatus()).append("§@§");
+                taskSB.append(sdf.format(t.getDueDate())).append("§@§");
+                taskSB.append(t.getProject()).append("§@§");
                 taskSB.append(t.getDescription());
                 write.append(taskSB);
             }
@@ -119,14 +126,7 @@ public class taskDB {
         }
     }
 
-    public boolean addTask(Task t){
-        if(titles.contains(t.getTitle())){
-            return false;
-        }else {
-            dataBase.add(t);
-            return true;
-        }
-    }
+    public void addTask(Task t){ dataBase.add(t); }
 
     public boolean hasTask(String taskTitle){ return titles.contains(taskTitle); }
 
@@ -180,17 +180,13 @@ public class taskDB {
     }
 
     public ArrayList<Task> getDataBase() { return dataBase;  }
-    public Task getTask(String task){return dataBase.get(searchTask(task));  }
 
-    public int searchTask(String title){
-        if(titles.contains(title)){
-            for(int i = 0; i < dataBase.size(); i ++){
-                Task t = dataBase.get(i);
-                if(t.getTitle().equals(t)){
-                    return i;
-                }
-            }
+    public Task getTask(String title){
+        for(int i = 0; i < dataBase.size(); i++){
+            Task t = dataBase.get(i);
+            if(t.getTitle().equals(title))
+                return t;
         }
-        return -1;
+        return null;
     }
 }
