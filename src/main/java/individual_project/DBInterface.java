@@ -124,6 +124,9 @@ public class DBInterface {
     }
 
     public void removeTask(String title) {
+        Task t = database.getTask(title);
+        System.out.println("The following task is removed!");
+        showTask(t);
         database.removeTask(title);
     }
 

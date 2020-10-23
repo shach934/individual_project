@@ -169,7 +169,7 @@ public class taskDB {
 
     public boolean removeTask(String title){
         if(hasTask(title)){
-            dataBase.remove(title);
+            dataBase.remove(searchTask(title));
             titleSet.remove(title);
             return true;
         }else {
@@ -220,11 +220,19 @@ public class taskDB {
     public ArrayList<Task> getDataBase() { return dataBase;  }
 
     public Task getTask(String title){
-        for(int i = 0; i < dataBase.size(); i++){
-            Task t = dataBase.get(i);
-            if(t.getTitle().equals(title))
-                return t;
-        }
+        int index = searchTask(title);
+        if(index != -1)
+            return dataBase.get(index);
         return null;
+    }
+
+    private int searchTask(String title){
+        for(int i = 0; i < dataBase.size(); i ++){
+            Task t = dataBase.get(i);
+            if(t.getTitle().equalsIgnoreCase(title)){
+                return i;
+            }
+        }
+        return -1;
     }
 }
