@@ -154,7 +154,7 @@ public class taskDB {
                 taskSB.append(t.getStatus()).append("§@§");
                 taskSB.append(sdf.format(t.getDueDate())).append("§@§");
                 taskSB.append(t.getProject()).append("§@§");
-                taskSB.append(t.getDescription());
+                taskSB.append(t.getDescription()).append("\n");
                 write.append(taskSB);
             }
             write.close();

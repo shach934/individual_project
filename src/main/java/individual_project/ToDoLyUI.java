@@ -52,7 +52,7 @@ public class ToDoLyUI {
         options.add("1) View Task");
         options.add("2) Add Task");
         options.add("3) Edit Task");
-        options.add("4) Save and QUit");
+        options.add("4) Save and Quit");
         commands = new HashMap<>();
         StringBuilder optSB = new StringBuilder();
         for(String op:options){
@@ -85,7 +85,7 @@ public class ToDoLyUI {
             if(validOption.contains(selected)){
                 return selected;
             }else {
-                System.out.println(ANSI_RED + "Not a valid selection! Try again!");
+                System.out.println(ANSI_RED + "Not a valid selection! Try again!" + ANSI_RESET);
             }
         }
         return "";
@@ -95,11 +95,13 @@ public class ToDoLyUI {
         String prompts = "1) Update a Task\n2) Mark a task as Done\n3) Remove a Task\n4) CANCEL";
         Set<String> validOpt = new HashSet<>(Arrays.asList("1", "2", "3", "4"));
         String selected = verifyInput(prompts, validOpt);
-        commands = new HashMap<>();
-        commands.put("1", this::updateTask);
-        commands.put("2", this::markDone);
-        commands.put("3", this::removeTask);
-        commands.get(selected).run();
+        if(selected.equals("4"))
+            return;
+        Map<String, Runnable> editCommands = new HashMap<>();
+        editCommands.put("1", this::updateTask);
+        editCommands.put("2", this::markDone);
+        editCommands.put("3", this::removeTask);
+        editCommands.get(selected).run();
     }
 
     private void removeTask() {
@@ -290,7 +292,6 @@ public class ToDoLyUI {
     }
 
     public void addTask(){
-
         String title = inputTitle();
         if(title.equals("CANCEL")){
             return;

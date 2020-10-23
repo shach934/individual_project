@@ -36,7 +36,8 @@ class ToDoLyTest {
 
         // The ToDoLy application here.
         ToDoLy t = new ToDoLy();
-        t.main();
+        String[] args = {};
+        t.main(args);
 
         // reset the std in and out stream to default.
         System.setIn(oldIn);
