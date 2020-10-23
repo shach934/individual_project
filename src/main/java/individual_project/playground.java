@@ -1,11 +1,19 @@
 package individual_project;
 
-public class playground {
-    public static void main(String[] args) {
-        String str = "geekss§@§for§@§geekss";
-        String[] arrOfStr = str.split("§@§", 3);
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-        for (String a : arrOfStr)
-            System.out.println(a);
+public class playground {
+    public static void main(String[] args) throws ParseException {
+        Task t = new Task();
+        t.setTitle("test");
+        Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm:dd").parse("2020-12-12 12:00:00");
+        t.setDueDate(date);
+        Status status = Status.DONE;
+        t.setStatus(status);
+        t.setProject("SDA");
+        t.setDescription("test task");
+        System.out.println(t.getStatus().equals("Done"));
     }
 }

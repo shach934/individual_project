@@ -209,8 +209,9 @@ public class taskDB {
     public ArrayList<Task> taskNotDone(){
         ArrayList<Task> taskNotDone = new ArrayList<>();
         for(int i = 0; i < dataBase.size(); i ++){
-            if(!dataBase.get(i).getStatus().equals(Status.DONE)){
-                taskNotDone.add(new Task(dataBase.get(i)));
+            Task t = dataBase.get(i);
+            if(!t.getStatus().equals("Done")){
+                taskNotDone.add(new Task(t));
             }
         }
         return taskNotDone;
