@@ -2,17 +2,27 @@
 <Diagram>
   <ID>JAVA</ID>
   <OriginalElement>individual_project</OriginalElement>
-  <nodes />
+  <nodes>
+    <node x="148.5" y="1813.0">individual_project.ToDoLyUI</node>
+    <node x="286.9324074074074" y="897.5">individual_project.playground</node>
+    <node x="232.80555555555557" y="0.0">individual_project.Status</node>
+    <node x="110.20648148148149" y="283.0">individual_project.Task</node>
+    <node x="51.76574074074077" y="1267.0">individual_project.DBInterface</node>
+    <node x="198.0" y="2491.0">individual_project.ToDoLy</node>
+    <node x="0.0" y="632.0">individual_project.taskDB</node>
+    <node x="189.0" y="2595.0">individual_project.ToDoLyTest</node>
+  </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="775.5" y="325.0" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="0.3265757464061924" x="218.0" y="1346.5" />
+  <SelectedNodes>
+    <node>individual_project.ToDoLyUI</node>
+  </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>
     <Category>Methods</Category>
     <Category>Properties</Category>
-    <Category>Inner Classes</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>

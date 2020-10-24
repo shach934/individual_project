@@ -6,14 +6,14 @@ In this individual project, a todo list application is built.
 
 The application let user input a task which is charactized by its **Title**, **Status**, **Due Date**. **Project**, **Description**.
 
-* **Title**: a string define the task, be unique for each task, if user adds a task with title already exists, application won't accept. ***It is case insensitive.***
-* **Status**: a serial predifined status options, ***TODO: user should select one of the status, instead of input.***
+* **Title**: a string define the task, be unique for each task, if user adds a task with title already exists, application won't accept. ***It is case insensitive.***, and it cannot be empty.
+* **Status**: a serial predifined status options.
   * Doing, working on right now.
   * Pending, pending for future.
   * ASAP, as soon as possible, urgent to complete.
   * Done, a task completed.
 * **Due Date**: a date in format *yyyy-mm-dd, hh:mm:ss* should be input by user, if the format is uncorrect, it will ask the input again, if the input date has already passed, it will also not accepted by application. ***TODO: User should be able to define the Date format in future version.***
-* **Project**: a string defines the project of the task.
+* **Project**: a string defines the project of the task. It cannot be empty.
 * **Description**: a few words to descript the task.
 
 After a task is created, it will be saved in a task database(*an ArrayList*). The database can show user all the tasks sorted by the time they are added, by *project*, by the *due date*, only not done tasks, ***TODO: Show single task selected by use***.
