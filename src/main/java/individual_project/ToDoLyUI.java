@@ -48,11 +48,6 @@ public class ToDoLyUI {
         getAllStatus();
         printWelcome();
 
-        options = new ArrayList<>();
-        options.add("1) View Task");
-        options.add("2) Add Task");
-        options.add("3) Edit Task");
-        options.add("4) Save and Quit");
         commands = new HashMap<>();
         StringBuilder optSB = new StringBuilder();
         for(String op:options){

@@ -1,0 +1,72 @@
+Loading tasks database: <ToDoLy.sda>.
+Welcome to the ToDoLy!
+You have [33m0[0m tasks todo and [32m0[0m tasks are done!
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+
+Title or CANCEL to exit
+Due Date(yyyy-MM-dd HH:mm:ss) or CANCEL to exit
+Status: 1) Doing 2) Pending 3) ASAP 4) Done  or CANCEL to exit
+Project or CANCEL to exit:
+Description or CANCEL to exit:
+The following task is added to the Todo list
+-------------------------------------------------------------------------------------------------------------------------------------
+Title                Status   Due Date                  Project                        Description                                        
+-------------------------------------------------------------------------------------------------------------------------------------
+test                 Doing    2020-12-18 00:00:00       Project_D                      test task1                                         
+-------------------------------------------------------------------------------------------------------------------------------------
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+
+Title or CANCEL to exit
+Due Date(yyyy-MM-dd HH:mm:ss) or CANCEL to exit
+Status: 1) Doing 2) Pending 3) ASAP 4) Done  or CANCEL to exit
+Project or CANCEL to exit:
+Description or CANCEL to exit:
+The following task is added to the Todo list
+-------------------------------------------------------------------------------------------------------------------------------------
+Title                Status   Due Date                  Project                        Description                                        
+-------------------------------------------------------------------------------------------------------------------------------------
+test2                Pending  2020-12-22 00:00:00       Project_C                      test task1                                         
+-------------------------------------------------------------------------------------------------------------------------------------
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+
+Title or CANCEL to exit
+Due Date(yyyy-MM-dd HH:mm:ss) or CANCEL to exit
+Status: 1) Doing 2) Pending 3) ASAP 4) Done  or CANCEL to exit
+Project or CANCEL to exit:
+Description or CANCEL to exit:
+The following task is added to the Todo list
+-------------------------------------------------------------------------------------------------------------------------------------
+Title                Status   Due Date                  Project                        Description                                        
+-------------------------------------------------------------------------------------------------------------------------------------
+test                 ASAP     2020-12-30 00:00:00       Project_B                      test task1                                         
+-------------------------------------------------------------------------------------------------------------------------------------
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+
+Title or CANCEL to exit
+Due Date(yyyy-MM-dd HH:mm:ss) or CANCEL to exit
+Status: 1) Doing 2) Pending 3) ASAP 4) Done  or CANCEL to exit
+Project or CANCEL to exit:
+Description or CANCEL to exit:
+The following task is added to the Todo list
+-------------------------------------------------------------------------------------------------------------------------------------
+Title                Status   Due Date                  Project                        Description                                        
+-------------------------------------------------------------------------------------------------------------------------------------
+test                 Done     2020-12-07 00:00:00       Project_A                      test task1                                         
+-------------------------------------------------------------------------------------------------------------------------------------
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+

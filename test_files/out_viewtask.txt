@@ -1,0 +1,79 @@
+Loading tasks database: <ToDoLy.sda>.
+Welcome to the ToDoLy!
+You have [33m3[0m tasks todo and [32m1[0m tasks are done!
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+
+1) Show Tasks by add time
+2) Show Tasks by Due date
+3) Show Tasks by Project
+4) Show tasks not done
+5) CANCEL
+-------------------------------------------------------------------------------------------------------------------------------------
+Title                Status   Due Date                  Project                        Description                                        
+-------------------------------------------------------------------------------------------------------------------------------------
+test                 Doing    2020-12-18 00:00:00       Project_D                      test task1                                         
+test2                Pending  2020-12-22 00:00:00       Project_C                      test task1                                         
+test                 ASAP     2020-12-30 00:00:00       Project_B                      test task1                                         
+test                 Done     2020-12-07 00:00:00       Project_A                      test task1                                         
+-------------------------------------------------------------------------------------------------------------------------------------
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+
+1) Show Tasks by add time
+2) Show Tasks by Due date
+3) Show Tasks by Project
+4) Show tasks not done
+5) CANCEL
+-------------------------------------------------------------------------------------------------------------------------------------
+Title                Status   Due Date                  Project                        Description                                        
+-------------------------------------------------------------------------------------------------------------------------------------
+test                 Done     2020-12-07 00:00:00       Project_A                      test task1                                         
+test                 Doing    2020-12-18 00:00:00       Project_D                      test task1                                         
+test2                Pending  2020-12-22 00:00:00       Project_C                      test task1                                         
+test                 ASAP     2020-12-30 00:00:00       Project_B                      test task1                                         
+-------------------------------------------------------------------------------------------------------------------------------------
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+
+1) Show Tasks by add time
+2) Show Tasks by Due date
+3) Show Tasks by Project
+4) Show tasks not done
+5) CANCEL
+-------------------------------------------------------------------------------------------------------------------------------------
+Title                Status   Due Date                  Project                        Description                                        
+-------------------------------------------------------------------------------------------------------------------------------------
+test                 Done     2020-12-07 00:00:00       Project_A                      test task1                                         
+test                 ASAP     2020-12-30 00:00:00       Project_B                      test task1                                         
+test2                Pending  2020-12-22 00:00:00       Project_C                      test task1                                         
+test                 Doing    2020-12-18 00:00:00       Project_D                      test task1                                         
+-------------------------------------------------------------------------------------------------------------------------------------
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+
+1) Show Tasks by add time
+2) Show Tasks by Due date
+3) Show Tasks by Project
+4) Show tasks not done
+5) CANCEL
+-------------------------------------------------------------------------------------------------------------------------------------
+Title                Status   Due Date                  Project                        Description                                        
+-------------------------------------------------------------------------------------------------------------------------------------
+test                 Doing    2020-12-18 00:00:00       Project_D                      test task1                                         
+test2                Pending  2020-12-22 00:00:00       Project_C                      test task1                                         
+test                 ASAP     2020-12-30 00:00:00       Project_B                      test task1                                         
+-------------------------------------------------------------------------------------------------------------------------------------
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+

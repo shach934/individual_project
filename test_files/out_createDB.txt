@@ -1,0 +1,10 @@
+Loading tasks database: <ToDoLy.sda>.
+[31mDoes NOT found the database file. Creating a new one![0m
+[32mDatabase file created: <ToDoLy.SDA>. Enjoy![0m
+Welcome to the ToDoLy!
+You have [33m0[0m tasks todo and [32m0[0m tasks are done!
+1) View Task
+2) Add Task
+3) Edit Task
+4) Save and Quit
+
