@@ -163,7 +163,10 @@ public class taskDB {
         }
     }
 
-    public void addTask(Task t){ dataBase.add(t); }
+    public void addTask(Task t){
+        dataBase.add(t);
+        titleSet.add(t.getTitle().toLowerCase());
+    }
 
     public boolean hasTask(String taskTitle){ return titleSet.contains(taskTitle.toLowerCase()); }
 

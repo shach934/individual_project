@@ -31,7 +31,7 @@ public class ToDoLyUI {
     public static final String ANSI_GREEN = "\u001b[32m";
     public static final String ANSI_YELLOW = "\u001b[33m";
 
-    ArrayList<String> options;
+    String mainMenu;
     Map<String, Runnable> commands;
     Scanner read;
     DBInterface taskInter;
@@ -47,12 +47,9 @@ public class ToDoLyUI {
         taskInter = new DBInterface(dateFormat);
         getAllStatus();
         printWelcome();
+        mainMenu = "1) View Task\n2) Add Task\n3) Edit Task\n4) Save and Quit";
 
         commands = new HashMap<>();
-        StringBuilder optSB = new StringBuilder();
-        for(String op:options){
-            optSB.append(op).append("\n");
-        }
         commands.put("1", this::showTasks);
         commands.put("2", this::addTask);
         commands.put("3", this::editTask);
@@ -60,7 +57,7 @@ public class ToDoLyUI {
         boolean exit = false;
         String selected;
         while (!exit){
-            System.out.println(optSB);
+            System.out.println(mainMenu);
             selected = read.nextLine().trim();
             if(commands.containsKey(selected)){
                 commands.get(selected).run();

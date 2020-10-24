@@ -7,4 +7,3 @@ You have [33m0[0m tasks todo and [32m0[0m tasks are done!
 2) Add Task
 3) Edit Task
 4) Save and Quit
-

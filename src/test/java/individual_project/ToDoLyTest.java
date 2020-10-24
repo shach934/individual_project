@@ -31,7 +31,7 @@ class ToDoLyTest {
         // redirect the std input to file.
         FileInputStream in = null;
         try {
-            in = new FileInputStream(new File("./test_files/in_createDB.txt"));
+            in = new FileInputStream(new File("./test_files/createDB_in.txt"));
             System.setIn(in);
         }
         catch (FileNotFoundException e) {
@@ -40,7 +40,7 @@ class ToDoLyTest {
 
         // redirect the std output to file.
         try{
-            FileOutputStream f = new FileOutputStream("./test_files/out_createDB.txt");
+            FileOutputStream f = new FileOutputStream("./test_files/createDB_out.txt");
             System.setOut(new PrintStream(f));
         }catch (FileNotFoundException e){
             System.out.println("There is no such file exists, check it!");
@@ -58,7 +58,7 @@ class ToDoLyTest {
     }
 
     @Test
-    void addTasks() {
+    void addViewTasks() {
         /**
          * Add tasks to a database.
          * save and exist the application.
@@ -70,7 +70,7 @@ class ToDoLyTest {
         // redirect the std input to file.
         FileInputStream in = null;
         try {
-            in = new FileInputStream(new File("./test_files/in_addtask.txt"));
+            in = new FileInputStream(new File("./test_files/addviewtask_in.txt"));
             System.setIn(in);
         }
         catch (FileNotFoundException e) {
@@ -79,7 +79,7 @@ class ToDoLyTest {
 
         // redirect the std output to file.
         try{
-            FileOutputStream f = new FileOutputStream("./test_files/out_addtask.txt");
+            FileOutputStream f = new FileOutputStream("./test_files/addviewtask_out.txt");
             System.setOut(new PrintStream(f));
         }catch (FileNotFoundException e){
             System.out.println("There is no such file exists, check it!");
@@ -97,7 +97,7 @@ class ToDoLyTest {
     }
 
     @Test
-    void viewTask() {
+    void removeTaskTest() {
         /**
          * Add tasks to a database.
          * save and exist the application.
@@ -109,7 +109,7 @@ class ToDoLyTest {
         // redirect the std input to file.
         FileInputStream in = null;
         try {
-            in = new FileInputStream(new File("./test_files/in_viewtask.txt"));
+            in = new FileInputStream(new File("./test_files/removeTask_in.txt"));
             System.setIn(in);
         }
         catch (FileNotFoundException e) {
@@ -118,7 +118,7 @@ class ToDoLyTest {
 
         // redirect the std output to file.
         try{
-            FileOutputStream f = new FileOutputStream("./test_files/out_viewtask.txt");
+            FileOutputStream f = new FileOutputStream("./test_files/removeTask_out.txt");
             System.setOut(new PrintStream(f));
         }catch (FileNotFoundException e){
             System.out.println("There is no such file exists, check it!");
